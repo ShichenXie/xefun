@@ -5,17 +5,25 @@
 \alias{date_eop}
 \title{start/end date by period}
 \usage{
-date_bop(x, freq, workday = FALSE)
+date_bop(freq, x, workday = FALSE)
 
-date_eop(x, freq, workday = FALSE)
+date_eop(freq, x, workday = FALSE)
 }
 \arguments{
-\item{x}{a date}
-
 \item{freq}{the frequency of period. It supports weekly, monthly, quarterly and yearly.}
+
+\item{x}{a date}
 
 \item{workday}{logical, whether to return the latest workday}
 }
 \description{
 The date of bop (beginning of period) or eop (end of period).
+}
+\examples{
+date_bop('weekly', Sys.Date())
+date_eop('weekly', Sys.Date())
+
+date_bop('monthly', Sys.Date())
+date_eop('monthly', Sys.Date())
+
 }

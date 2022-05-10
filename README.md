@@ -4,22 +4,4 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of xefun is to ...
-
-## Installation
-
-You can install the development version of xefun like so:
-
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
-```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(xefun)
-## basic example code
-```
-
+This R package `xefun` includes functions that used for x enginnering (feature enginnering) or supporting in other packages. You can install the release version of `xefun` from CRN with `install.package('xefun')`, or the development version of `xefun` from github with `devtools::install_github('shichenxie/xefun')`.

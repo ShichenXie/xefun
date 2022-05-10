@@ -15,12 +15,19 @@ as_date = function(x, format = NULL) {
 #'
 #' The date of bop (beginning of period) or eop (end of period).
 #'
-#' @param x a date
 #' @param freq the frequency of period. It supports weekly, monthly, quarterly and yearly.
+#' @param x a date
 #' @param workday logical, whether to return the latest workday
 #'
+#' @examples
+#' date_bop('weekly', Sys.Date())
+#' date_eop('weekly', Sys.Date())
+#'
+#' date_bop('monthly', Sys.Date())
+#' date_eop('monthly', Sys.Date())
+#'
 #' @export
-date_bop = function(x, freq, workday = FALSE) {
+date_bop = function(freq, x, workday = FALSE) {
   bop_mthday = NULL
 
   x = as_date(x)
@@ -50,7 +57,7 @@ date_bop = function(x, freq, workday = FALSE) {
 
 #' @export
 #' @rdname date_bop
-date_eop = function(x, freq, workday = FALSE) {
+date_eop = function(freq, x, workday = FALSE) {
   if (inherits(x, 'character')) x = as_date(x)
 
   if (freq == 'yearly') {
@@ -79,8 +86,17 @@ date_eop = function(x, freq, workday = FALSE) {
 #' @param default_from the default date when date_range is sett to max
 #'
 #' @examples
+#' date_from(3)
+#' date_from('3d')
 #'
-#'s
+#' date_from('3m')
+#' date_from('3q')
+#' date_from('3y')
+#'
+#' date_from('mtd')
+#' date_from('qtd')
+#' date_from('ytd')
+#'
 #' @export
 date_from = function(date_range, to=Sys.Date(), default_from='1000-01-01') {
   UseMethod('date_from')
@@ -164,7 +180,7 @@ date_from.character = function(date_range, to = Sys.Date(), default_from='1000-0
   return(from)
 }
 #' @export
-date_from.numeric <- function(date_range, to = Sys.Date()) {
+date_from.numeric <- function(date_range, to = Sys.Date(), ...) {
   ft = NULL
   # , tz = Sys.timezone()
   to = as_date(to)

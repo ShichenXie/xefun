@@ -17,6 +17,15 @@ date_from(date_range, to = Sys.Date(), default_from = "1000-01-01")
 The date before a specified date by date_range.
 }
 \examples{
+date_from(3)
+date_from('3d')
 
-s
+date_from('3m')
+date_from('3q')
+date_from('3y')
+
+date_from('mtd')
+date_from('qtd')
+date_from('ytd')
+
 }

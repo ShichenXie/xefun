@@ -38,7 +38,7 @@ conticnt = function(dt, col, opr = '==', threshold = 0, cnt = FALSE) {
 }
 
 #' @export
-conticnt.numeric = function(dt, opr = '==', threshold = 0, cnt = FALSE, ...) {
+conticnt.numeric = function(dt, col=NULL, opr = '==', threshold = 0, cnt = FALSE) {
   datCnt = conticnt.data.frame(data.table(V1 = dt), col = 'V1', opr = opr, threshold = threshold, cnt = cnt)
 
   ret = setNames(datCnt$ct_N, datCnt$ct_oprth)

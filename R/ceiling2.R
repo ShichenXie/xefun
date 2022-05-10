@@ -24,6 +24,7 @@ ceiling2 = function(x, digits=1) {
   e = sub('.+(e.+)$', '\\1', x_sci)
   as.numeric(paste0(z, e))
 }
+
 #' @export
 #' @rdname ceiling2
 floor2 = function(x, digits=1) {

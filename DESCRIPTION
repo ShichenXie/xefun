@@ -1,13 +1,13 @@
 Package: xefun
-Type: Package
-Title: X-enginnering or supporting functions
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: X-enginnering functions or supporting functions used in other packages.
-License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.2
+Title: X-enginnering or supporting functions
+Description: X-enginnering functions for  or supporting functions used in other packages.
+Authors@R: person("Shichen", "Xie", , "xie@shichen.name", c("aut", "cre"))
 Imports: 
     data.table 
+License: MIT + file LICENSE
+URL: https://github.com/ShichenXie/xefun
+BugReports: https://github.com/ShichenXie/xefun/issues
+LazyData: true
+Encoding: UTF-8
+RoxygenNote: 7.1.2
