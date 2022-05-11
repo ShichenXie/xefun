@@ -1,7 +1,8 @@
 Package: xefun
 Version: 0.1.0
-Title: X-engineering or supporting functions
-Description: X-engineering functions for  or supporting functions used in other packages.
+Title: X-Engineering or Supporting Functions
+Description: Miscellaneous functions used for x-engineering (feature engineering) or 
+  for supporting in other packages maintained by ShichenXie.
 Authors@R: person("Shichen", "Xie", , "xie@shichen.name", c("aut", "cre"))
 Imports: 
     data.table 
