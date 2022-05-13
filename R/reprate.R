@@ -1,9 +1,11 @@
 #' char repetition rate
 #'
-#' reprate estimate the max rate of character repetition.
+#' reprate estimates the max rate of character repetition.
 #'
-#' @param dt a data frame or vector.
+#' @param x a character vector or a data frame.
 #' @param col a character column name.
+#'
+#' @return a numeric vector indicating the max rate of character repetition in the corresponding elements in argument x vector.
 #'
 #' @examples
 #' x = c('a', 'aa', 'ab', 'aab', 'aaab')
@@ -12,20 +14,20 @@
 #' reprate(data.frame(x=x), 'x')
 #'
 #' @export
-reprate = function(dt, col) {
+reprate = function(x, col) {
   UseMethod('reprate')
 }
 
 #' @export
-reprate.character = function(dt, ...) {
-  reprate.data.frame(data.table(V1=dt), 'V1')[['reprate_V1']]
+reprate.character = function(x, ...) {
+  reprate.data.frame(data.table(V1=x), 'V1')[['reprate_V1']]
 }
 
 #' @export
-reprate.data.frame = function(dt, col) {
+reprate.data.frame = function(x, col) {
   num = repn = rid = NULL
 
-  dat = setDT(copy(dt))[, rid := .I]
+  dat = setDT(copy(x))[, rid := .I]
 
   dat2 = dat[!is.na(get(col)),c('rid', col),with=FALSE
   ][, strsplit(get(col),''), by = 'rid'

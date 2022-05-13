@@ -2,51 +2,53 @@
 #'
 #' It counts the number of values continuous comparing with a threshold.
 #'
-#' @param dt a data frame or vector.
+#' @param x a numeric vector or a data frame.
 #' @param col a numeric column name.
 #' @param opr relational operators, defaults to ==.
 #' @param threshold threshold value, defaults to 0.
 #' @param cnt whether to count the number rows in each continuous groups.
 #'
+#' @return A integer vector indicating the number of elements in argument x continuous comparing with a threshold.
+#'
 #' @examples
 #' # example I
-#' dt1 = c(0,0,0, 1,1,1, 0,0, 1,1)
-#' conticnt(dt1)
-#' conticnt(dt1, cnt = TRUE)
-#' conticnt(dt1, opr = '<=')
+#' x1 = c(0,0,0, 1,1,1, 0,0, 1,1)
+#' conticnt(x1)
+#' conticnt(x1, cnt = TRUE)
+#' conticnt(x1, opr = '<=')
 #'
 #' # example II
-#' dt2 = data.frame(x = c(0,0,0, 1,1,1, 0,0, 1,1))
-#' conticnt(dt2, col='x')
-#' conticnt(dt2, col='x', cnt=TRUE)
-#' conticnt(dt2, col='x', opr='<=')
+#' x2 = data.frame(x = c(0,0,0, 1,1,1, 0,0, 1,1))
+#' conticnt(x2, col='x')
+#' conticnt(x2, col='x', cnt=TRUE)
+#' conticnt(x2, col='x', opr='<=')
 #'
 #' library(data.table)
-#' setDT(dt2)[, ct_N := conticnt(x)][]
+#' setDT(x2)[, ct_N := conticnt(x)][]
 #'
 #' # example III
 #' # number of growth values
-#' dt3 = data.frame(x = c(0,1,2, 3,2,1, 0,1, 2,1))
-#' dt3 = setDT(dt3)[, diff := x - shift(x,type='lag',fill = 0)]
-#' conticnt(dt3, col='diff', opr = '>=')
+#' x3 = data.frame(x = c(0,1,2, 3,2,1, 0,1, 2,1))
+#' x3 = setDT(x3)[, diff := x - shift(x,type='lag',fill = 0)]
+#' conticnt(x3, col='diff', opr = '>=')
 #'
 #' @import data.table
 #' @importFrom stats setNames
 #' @export
-conticnt = function(dt, col, opr = '==', threshold = 0, cnt = FALSE) {
+conticnt = function(x, col, opr = '==', threshold = 0, cnt = FALSE) {
   UseMethod('conticnt')
 }
 
 #' @export
-conticnt.numeric = function(dt, col=NULL, opr = '==', threshold = 0, cnt = FALSE) {
-  datCnt = conticnt.data.frame(data.table(V1 = dt), col = 'V1', opr = opr, threshold = threshold, cnt = cnt)
+conticnt.numeric = function(x, col=NULL, opr = '==', threshold = 0, cnt = FALSE) {
+  datCnt = conticnt.data.frame(data.table(V1 = x), col = 'V1', opr = opr, threshold = threshold, cnt = cnt)
 
   ret = setNames(datCnt$ct_N, datCnt$ct_oprth)
   return(ret)
 }
 
 #' @export
-conticnt.data.frame = function(dt, col, opr = '==', threshold = 0, cnt = FALSE) {
+conticnt.data.frame = function(x, col, opr = '==', threshold = 0, cnt = FALSE) {
   V1=comp=contigp=contix=ct_N=ct_group=ct_oprth=op=opgp=NULL
 
   relopr = data.table(
@@ -55,7 +57,7 @@ conticnt.data.frame = function(dt, col, opr = '==', threshold = 0, cnt = FALSE) 
     key = 'op'
   )
 
-  dt = setDT(copy(dt))
+  dt = setDT(copy(x))
   setnames(dt, col, 'V1')
 
   datCnt = copy(dt)[, comp := do.call(opr, list(V1,threshold))

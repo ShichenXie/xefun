@@ -4,10 +4,10 @@
 \alias{conticnt}
 \title{continuous counting}
 \usage{
-conticnt(dt, col, opr = "==", threshold = 0, cnt = FALSE)
+conticnt(x, col, opr = "==", threshold = 0, cnt = FALSE)
 }
 \arguments{
-\item{dt}{a data frame or vector.}
+\item{x}{a numeric vector or a data frame.}
 
 \item{col}{a numeric column name.}
 
@@ -17,29 +17,32 @@ conticnt(dt, col, opr = "==", threshold = 0, cnt = FALSE)
 
 \item{cnt}{whether to count the number rows in each continuous groups.}
 }
+\value{
+A integer vector indicating the number of elements in argument x continuous comparing with a threshold.
+}
 \description{
 It counts the number of values continuous comparing with a threshold.
 }
 \examples{
 # example I
-dt1 = c(0,0,0, 1,1,1, 0,0, 1,1)
-conticnt(dt1)
-conticnt(dt1, cnt = TRUE)
-conticnt(dt1, opr = '<=')
+x1 = c(0,0,0, 1,1,1, 0,0, 1,1)
+conticnt(x1)
+conticnt(x1, cnt = TRUE)
+conticnt(x1, opr = '<=')
 
 # example II
-dt2 = data.frame(x = c(0,0,0, 1,1,1, 0,0, 1,1))
-conticnt(dt2, col='x')
-conticnt(dt2, col='x', cnt=TRUE)
-conticnt(dt2, col='x', opr='<=')
+x2 = data.frame(x = c(0,0,0, 1,1,1, 0,0, 1,1))
+conticnt(x2, col='x')
+conticnt(x2, col='x', cnt=TRUE)
+conticnt(x2, col='x', opr='<=')
 
 library(data.table)
-setDT(dt2)[, ct_N := conticnt(x)][]
+setDT(x2)[, ct_N := conticnt(x)][]
 
 # example III
 # number of growth values
-dt3 = data.frame(x = c(0,1,2, 3,2,1, 0,1, 2,1))
-dt3 = setDT(dt3)[, diff := x - shift(x,type='lag',fill = 0)]
-conticnt(dt3, col='diff', opr = '>=')
+x3 = data.frame(x = c(0,1,2, 3,2,1, 0,1, 2,1))
+x3 = setDT(x3)[, diff := x - shift(x,type='lag',fill = 0)]
+conticnt(x3, col='diff', opr = '>=')
 
 }

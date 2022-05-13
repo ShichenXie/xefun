@@ -5,6 +5,11 @@
 #' @param x a numeric vector.
 #' @param digits integer indicating the number of significant digits.
 #'
+#' @return
+#' ceiling2 rounds the elements in x to the specified number of significant digits that is the smallest number not less than the corresponding elements.
+#'
+#' floor2 rounds the elements in x to the specified number of significant digits that is the largest number not greater than the corresponding elements.
+#'
 #' @examples
 #' x = c(12345, 54.321)
 #'

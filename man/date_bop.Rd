@@ -16,6 +16,11 @@ date_eop(freq, x, workday = FALSE)
 
 \item{workday}{logical, whether to return the latest workday}
 }
+\value{
+date_bop returns the beginning date of period of corresponding x by frequency.
+
+date_eop returns the end date of period of corresponding x by frequency.
+}
 \description{
 The date of bop (beginning of period) or eop (end of period).
 }

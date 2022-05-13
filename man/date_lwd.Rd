@@ -11,6 +11,9 @@ date_lwd(n, to = Sys.Date())
 
 \item{to}{a date, default is current system date.}
 }
+\value{
+It returns the latest workday date that is n days before a specified date.
+}
 \description{
 The latest workday date of n days before a specified date.
 }

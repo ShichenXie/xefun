@@ -19,6 +19,11 @@ as_date = function(x, format = NULL) {
 #' @param x a date
 #' @param workday logical, whether to return the latest workday
 #'
+#' @return
+#' date_bop returns the beginning date of period of corresponding x by frequency.
+#'
+#' date_eop returns the end date of period of corresponding x by frequency.
+#'
 #' @examples
 #' date_bop('weekly', Sys.Date())
 #' date_eop('weekly', Sys.Date())
@@ -84,6 +89,8 @@ date_eop = function(freq, x, workday = FALSE) {
 #' @param date_range date range, available value including nd, nm, mtd, qtd, ytd, ny, max.
 #' @param to a date, default is current system date.
 #' @param default_from the default date when date_range is sett to max
+#'
+#' @return It returns the start date of a date_range with a specified end date.
 #'
 #' @examples
 #' date_from(3)
@@ -196,6 +203,8 @@ date_from.numeric <- function(date_range, to = Sys.Date(), ...) {
 #'
 #' @param n number of days
 #' @param to a date, default is current system date.
+#'
+#' @return It returns the latest workday date that is n days before a specified date.
 #'
 #' @examples
 #' date_lwd(5)

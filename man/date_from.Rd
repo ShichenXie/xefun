@@ -13,6 +13,9 @@ date_from(date_range, to = Sys.Date(), default_from = "1000-01-01")
 
 \item{default_from}{the default date when date_range is sett to max}
 }
+\value{
+It returns the start date of a date_range with a specified end date.
+}
 \description{
 The date before a specified date by date_range.
 }

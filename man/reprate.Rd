@@ -4,15 +4,18 @@
 \alias{reprate}
 \title{char repetition rate}
 \usage{
-reprate(dt, col)
+reprate(x, col)
 }
 \arguments{
-\item{dt}{a data frame or vector.}
+\item{x}{a character vector or a data frame.}
 
 \item{col}{a character column name.}
 }
+\value{
+a numeric vector indicating the max rate of character repetition in the corresponding elements in argument x vector.
+}
 \description{
-reprate estimate the max rate of character repetition.
+reprate estimates the max rate of character repetition.
 }
 \examples{
 x = c('a', 'aa', 'ab', 'aab', 'aaab')

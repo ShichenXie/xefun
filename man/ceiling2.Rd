@@ -14,6 +14,11 @@ floor2(x, digits = 1)
 
 \item{digits}{integer indicating the number of significant digits.}
 }
+\value{
+ceiling2 rounds the elements in x to the specified number of significant digits that is the smallest number not less than the corresponding elements.
+
+floor2 rounds the elements in x to the specified number of significant digits that is the largest number not greater than the corresponding elements.
+}
 \description{
 The ceiling2 is ceiling of numeric values by digits. The floor2 is floor of numeric values by digits.
 }
