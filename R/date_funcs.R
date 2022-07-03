@@ -35,6 +35,7 @@ as_date = function(x, format = NULL) {
 date_bop = function(freq, x, workday = FALSE) {
   bop_mthday = NULL
 
+  freq = match.arg(freq, c('daily', 'weekly', 'monthly', 'quarterly', 'yearly'))
   x = as_date(x)
 
   monthday = data.table(
@@ -63,6 +64,7 @@ date_bop = function(freq, x, workday = FALSE) {
 #' @export
 #' @rdname date_bop
 date_eop = function(freq, x, workday = FALSE) {
+  freq = match.arg(freq, c('daily', 'weekly', 'monthly', 'quarterly', 'yearly'))
   if (inherits(x, 'character')) x = as_date(x)
 
   if (freq == 'yearly') {
@@ -228,5 +230,11 @@ date_lwd = function(n, to = Sys.Date()) {
     }
   )
 
-  return(from)
+  return(as_date(from))
 }
+
+
+is_datetime = function(x) {
+  inherits(x, c("Date","POSIXlt","POSIXct","POSIXt"))
+}
+
