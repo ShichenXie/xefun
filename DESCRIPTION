@@ -1,5 +1,5 @@
 Package: xefun
-Version: 0.1.1
+Version: 0.1.1.999
 Title: X-Engineering or Supporting Functions
 Description: Miscellaneous functions used for x-engineering (feature engineering) or 
   for supporting in other packages maintained by 'Shichen Xie'.
