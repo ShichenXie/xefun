@@ -158,33 +158,37 @@ date_from_ym = function(date_range, to = Sys.Date()) {
 #' @export
 date_from.character = function(date_range, to = Sys.Date(), default_from='1000-01-01') {
   to = as_date(to)
+  from = NULL
 
-  if (grepl("[yqm]td", date_range)) {
-    from = date_from_xtd(date_range, to)
-  } else if (grepl("[1-9][0-9]*d", date_range)) {
-    from = to - as.integer(sub("d","",date_range))
-  } else if (grepl("[1-9][0-9]*w", date_range)) {
-    from = to - as.integer(sub("w","",date_range))*7
-  } else if (grepl("[1-9][0-9]*m", date_range)) {
-    for (i in c(0, 1, -1, 2, -2)) {
-      from = try(date_from_xm(date_range, to+i), silent = TRUE)
-      if (!inherits(from, 'try-error')) {
-        if (i != 0) from = from - i/abs(i)
-        break
-      }
-    }
-  } else if (grepl("[1-9][0-9]*y", date_range)) {
-    for (i in c(0, 1, -1, 2, -2)) {
-      from = try(date_from_ym(date_range, to+i), silent = TRUE)
-      if (!inherits(from, 'try-error')) {
-        if (i != 0) from = from - i/abs(i)
-        break
-      }
-    }
-  } else if (date_range == 'max') {
+  if (grepl("[1-9][0-9]*q", date_range)) date_range = sprintf('%sm', as.integer(sub('q', '', date_range)))
+
+  if (date_range == 'max') {
     from = as_date(default_from)
+  } else if (grepl("[yqm]td", date_range)) {
+    from = date_from_xtd(date_range, to)
   } else {
-    from = NULL
+    if (grepl("[1-9][0-9]*d", date_range)) {
+      from = to - as.integer(sub("d","",date_range))
+    } else if (grepl("[1-9][0-9]*w", date_range)) {
+      from = to - as.integer(sub("w","",date_range))*7
+    } else if (grepl("[1-9][0-9]*m", date_range)) {
+      for (i in c(0, 1, -1, 2, -2)) {
+        from = try(date_from_xm(date_range, to+i), silent = TRUE)
+        if (!inherits(from, 'try-error')) {
+          if (i != 0) from = from - i/abs(i)
+          break
+        }
+      }
+    } else if (grepl("[1-9][0-9]*y", date_range)) {
+      for (i in c(0, 1, -1, 2, -2)) {
+        from = try(date_from_ym(date_range, to+i), silent = TRUE)
+        if (!inherits(from, 'try-error')) {
+          if (i != 0) from = from - i/abs(i)
+          break
+        }
+      }
+    }
+    from = from + 1
   }
   return(from)
 }
@@ -193,7 +197,7 @@ date_from.numeric <- function(date_range, to = Sys.Date(), ...) {
   ft = NULL
   # , tz = Sys.timezone()
   to = as_date(to)
-  from = to - date_range
+  from = to - date_range + 1
 
   return(from)
 }
