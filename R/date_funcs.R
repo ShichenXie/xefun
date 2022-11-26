@@ -238,7 +238,13 @@ date_lwd = function(n, to = Sys.Date()) {
 }
 
 
-is_datetime = function(x) {
+is.datetime = function(x) {
   inherits(x, c("Date","POSIXlt","POSIXct","POSIXt"))
 }
 
+
+# convert date to second
+date_num = function(x) {
+  xnum = as.numeric(as.POSIXct(x))
+  return(xnum)
+}

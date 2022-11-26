@@ -1,6 +1,6 @@
-# xefun 0.1.1.999
+# xefun 0.1.2
 
-* added cols_name function
+* added cols_type and cols_const function
 * fiexd a bug in date_from function
 
 # xefun 0.1.1
