@@ -243,8 +243,30 @@ is.datetime = function(x) {
 }
 
 
-# convert date to second
-date_num = function(x) {
-  xnum = as.numeric(as.POSIXct(x))
-  return(xnum)
+#' date to number
+#'
+#' It converts date to a number of milliseconds/seconds/days since an original date.
+#'
+#' @param x date.
+#' @param unit number unit, available values including ms (milliseconds), s (seconds), d (days).
+#' @param origin original date, defaults to 1970-01-01.
+#'
+#' @examples
+#' date_num(Sys.time(), unit='ms')
+#' date_num(Sys.time(), unit='s')
+#' date_num(Sys.time(), unit='d')
+#'
+#' @export
+date_num = function(x, unit="s", origin = "1970-01-01") {
+  unit = match.arg(unit, c('ms', 's', 'd'))
+
+  if (unit == 'ms') {
+    xnum = as.numeric(as.POSIXct(x, origin=origin))*1000
+  } else if (unit == 's') {
+    xnum = as.numeric(as.POSIXct(x, origin=origin))
+  } else if (unit == 'd') {
+    xnum = as.numeric(as.Date(x, origin=origin))
+  }
+
+  return(format(xnum, scientific = FALSE))
 }
