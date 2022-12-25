@@ -1,9 +1,48 @@
-# vector to list
-c_list = function(x, name=TRUE) {
-    lst = as.list(x)
-    if (isTRUE(name)) lst = setNames(lst, x)
+#' vector to list
+#'
+#' Converting a vector to a list with names specified.
+#'
+#' @param x a vector.
+#' @param name specify the names of list. Setting the names of list as x by default.
+#' @param ... Additional parameters provided in the as.list function.
+#'
+#' @examples
+#' as.list2(c('a', 'b'))
+#'
+#' as.list2(c('a', 'b'), name = FALSE)
+#'
+#' as.list2(c('a', 'b'), name = c('c', 'd'))
+#'
+#' @export
+as.list2 = function(x, name=TRUE, ...) {
+    lst = as.list(x, ...)
+
+    if (isTRUE(name)) {
+      lst = setNames(lst, x)
+    } else if (length(name) == length(x)) {
+      lst = setNames(lst, name)
+    }
     return(lst)
 }
+
+c_list = function(x, name=TRUE, ...) {
+  as.list2(x, name, ...)
+}
+
+#' merge data.frames list
+#'
+#' Merge a list of data.frames by common columns or row names.
+#'
+#' @param datlst a list of data.frames.
+#' @param by A vector of shared column names in x and y to merge on. This defaults to the shared key columns between the two tables. If y has no key columns, this defaults to the key of x.
+#' @param all logical; all = TRUE is shorthand to save setting both all.x = TRUE and all.y = TRUE.
+#' @param ... Additional parameters provided in the merge function.
+#'
+#' @export
+merge2 = function(datlst, by = NULL, all = TRUE, ...) {
+  Reduce(function(x,y) merge(setDT(x), setDT(y), by = by, all=all, ...), datlst )
+}
+
 
 #' columns by type
 #'

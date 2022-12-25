@@ -1,11 +1,12 @@
-# xefun 0.1.2.999
+# xefun 0.1.3
 
 * added a new function date_num to convert date to number
+* fixed a few bugs 
 
 # xefun 0.1.2
 
 * added cols_type and cols_const function
-* fiexd a bug in date_from function
+* fixed a bug in date_from function
 
 # xefun 0.1.1
 
