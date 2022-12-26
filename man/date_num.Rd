@@ -4,21 +4,38 @@
 \alias{date_num}
 \title{date to number}
 \usage{
-date_num(x, unit = "s", origin = "1970-01-01")
+date_num(x, unit = "s", origin = "1970-01-01", scientific = FALSE)
 }
 \arguments{
 \item{x}{date.}
 
-\item{unit}{number unit, available values including ms (milliseconds), s (seconds), d (days).}
+\item{unit}{date unit, available values including milliseconds, seconds, minutes, hours, days, weeks.}
 
 \item{origin}{original date, defaults to 1970-01-01.}
+
+\item{scientific}{logical, whether to encode the number in scientific format, defaults to FALSE.}
 }
 \description{
-It converts date to a number of milliseconds/seconds/days since an original date.
+It converts date to a number in specified date unit from an original date.
 }
 \examples{
-date_num(Sys.time(), unit='ms')
+# setting unit
+date_num(Sys.time(), unit='milliseconds')
+date_num(Sys.time(), unit='mil')
+
+date_num(Sys.time(), unit='seconds')
 date_num(Sys.time(), unit='s')
+
+date_num(Sys.time(), unit='days')
 date_num(Sys.time(), unit='d')
+
+# setting origin
+date_num(Sys.time(), unit='d', origin = '1970-01-01')
+date_num(Sys.time(), unit='d', origin = '2022-01-01')
+
+# setting scientific format
+date_num(Sys.time(), unit='mil', scientific = FALSE)
+date_num(Sys.time(), unit='mil', scientific = TRUE)
+date_num(Sys.time(), unit='mil', scientific = NULL)
 
 }

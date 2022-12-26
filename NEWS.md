@@ -1,3 +1,7 @@
+# xefun 0.1.3.999
+
+* fixed a bug in the date_num function
+
 # xefun 0.1.3
 
 * added a new function date_num to convert date to number

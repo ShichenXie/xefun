@@ -245,28 +245,48 @@ is.datetime = function(x) {
 
 #' date to number
 #'
-#' It converts date to a number of milliseconds/seconds/days since an original date.
+#' It converts date to a number in specified date unit from an original date.
 #'
 #' @param x date.
-#' @param unit number unit, available values including ms (milliseconds), s (seconds), d (days).
+#' @param unit date unit, available values including milliseconds, seconds, minutes, hours, days, weeks.
 #' @param origin original date, defaults to 1970-01-01.
+#' @param scientific logical, whether to encode the number in scientific format, defaults to FALSE.
 #'
 #' @examples
-#' date_num(Sys.time(), unit='ms')
+#' # setting unit
+#' date_num(Sys.time(), unit='milliseconds')
+#' date_num(Sys.time(), unit='mil')
+#'
+#' date_num(Sys.time(), unit='seconds')
 #' date_num(Sys.time(), unit='s')
+#'
+#' date_num(Sys.time(), unit='days')
 #' date_num(Sys.time(), unit='d')
 #'
+#' # setting origin
+#' date_num(Sys.time(), unit='d', origin = '1970-01-01')
+#' date_num(Sys.time(), unit='d', origin = '2022-01-01')
+#'
+#' # setting scientific format
+#' date_num(Sys.time(), unit='mil', scientific = FALSE)
+#' date_num(Sys.time(), unit='mil', scientific = TRUE)
+#' date_num(Sys.time(), unit='mil', scientific = NULL)
+#'
 #' @export
-date_num = function(x, unit="s", origin = "1970-01-01") {
-  unit = match.arg(unit, c('ms', 's', 'd'))
+date_num = function(x, unit="s", origin = "1970-01-01", scientific = FALSE) {
+  sec = NULL
 
-  if (unit == 'ms') {
-    xnum = as.numeric(as.POSIXct(x, origin=origin))*1000
-  } else if (unit == 's') {
-    xnum = as.numeric(as.POSIXct(x, origin=origin))
-  } else if (unit == 'd') {
-    xnum = as.numeric(as.Date(x, origin=origin))
-  }
+  if (unit == 'ms') unit = 'milliseconds'
+  unit = match.arg(unit, c('milliseconds', 'seconds', 'minutes', 'hours', 'days', 'weeks'))
 
-  return(format(xnum, scientific = FALSE))
+  unit2sec = data.table(
+    unit = c('milliseconds', 'seconds', 'minutes', 'hours', 'days', 'weeks'),
+    sec = c(1/1000, 1, 60, 60*60, 60*60*24, 60*60*24*7),
+    key = 'unit'
+  )
+
+  xnum = (as.numeric(as.POSIXct(x)) - as.numeric(as.POSIXct(origin))) / unit2sec[unit, sec]
+  if (is.logical(scientific)) xnum = format(xnum, scientific = scientific)
+
+  return(xnum)
 }
