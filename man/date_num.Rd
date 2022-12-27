@@ -9,14 +9,14 @@ date_num(x, unit = "s", origin = "1970-01-01", scientific = FALSE)
 \arguments{
 \item{x}{date.}
 
-\item{unit}{date unit, available values including milliseconds, seconds, minutes, hours, days, weeks.}
+\item{unit}{time unit, available values including milliseconds, seconds, minutes, hours, days, weeks.}
 
 \item{origin}{original date, defaults to 1970-01-01.}
 
 \item{scientific}{logical, whether to encode the number in scientific format, defaults to FALSE.}
 }
 \description{
-It converts date to a number in specified date unit from an original date.
+It converts date to numeric value in specified unit.
 }
 \examples{
 # setting unit

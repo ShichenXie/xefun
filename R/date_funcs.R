@@ -245,10 +245,10 @@ is.datetime = function(x) {
 
 #' date to number
 #'
-#' It converts date to a number in specified date unit from an original date.
+#' It converts date to numeric value in specified unit.
 #'
 #' @param x date.
-#' @param unit date unit, available values including milliseconds, seconds, minutes, hours, days, weeks.
+#' @param unit time unit, available values including milliseconds, seconds, minutes, hours, days, weeks.
 #' @param origin original date, defaults to 1970-01-01.
 #' @param scientific logical, whether to encode the number in scientific format, defaults to FALSE.
 #'
