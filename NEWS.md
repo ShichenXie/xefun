@@ -1,4 +1,4 @@
-# xefun 0.1.3.999
+# xefun 0.1.4
 
 * fixed a bug in the date_num function
 
