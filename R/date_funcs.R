@@ -157,6 +157,15 @@ date_from_ym = function(date_range, to = Sys.Date()) {
 # the date from date_range before (calendar day)
 #' @export
 date_from.character = function(date_range, to = Sys.Date(), default_from='1000-01-01') {
+  V1 = rid = NULL
+  data.table(t = to)[
+    , rid := .I
+  ][, date_from.char1(date_range, t, default_from), by = rid
+  ][, V1]
+}
+
+
+date_from.char1 = function(date_range, to = Sys.Date(), default_from='1000-01-01') {
   to = as_date(to)
   from = NULL
 
@@ -290,3 +299,22 @@ date_num = function(x, unit="s", origin = "1970-01-01", scientific = FALSE) {
 
   return(xnum)
 }
+
+
+dat_filter = function(dat, date_range, timestamp, timesubmit) {
+  if (!is.null(date_range) && !is.na(date_range)) {
+    timestamp_col = timesubmit_col = NULL
+
+    timecols = c(timestamp, timesubmit)
+    dat = copy(dat)[, (c('timestamp_col', 'timesubmit_col')) := lapply(.SD, as_date), .SDcols = timecols]
+
+    dat = dat[
+      timestamp_col >= date_from(date_range, timesubmit_col) &
+        timestamp_col < timesubmit_col
+    ][, (c('timestamp_col', 'timesubmit_col')) := NULL]
+
+  }
+
+  return(dat)
+}
+
