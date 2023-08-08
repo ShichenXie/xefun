@@ -1,4 +1,4 @@
-# xefun 0.1.4.999 
+# xefun 0.1.5 
 
 * the 'to' argument in date_from function supports vector
 * added an inner function dat_filter to filter data set by given date range
