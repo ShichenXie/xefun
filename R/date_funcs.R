@@ -160,12 +160,12 @@ date_from.character = function(date_range, to = Sys.Date(), default_from='1000-0
   V1 = rid = NULL
   data.table(t = to)[
     , rid := .I
-  ][, date_from.char1(date_range, t, default_from), by = rid
+  ][, date_from_char1(date_range, t, default_from), by = rid
   ][, V1]
 }
 
 
-date_from.char1 = function(date_range, to = Sys.Date(), default_from='1000-01-01') {
+date_from_char1 = function(date_range, to = Sys.Date(), default_from='1000-01-01') {
   to = as_date(to)
   from = NULL
 
