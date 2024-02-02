@@ -1,3 +1,7 @@
+# xefun 0.1.5.999 
+
+* added new functions max2/min2 reutrn NA instead of Inf/-Inf
+
 # xefun 0.1.5 
 
 * the 'to' argument in date_from function supports vector
