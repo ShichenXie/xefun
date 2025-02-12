@@ -1,4 +1,4 @@
-# xefun 0.1.5.999 
+# xefun 0.1.6
 
 * added new functions max2/min2 reutrn NA instead of Inf/-Inf
 

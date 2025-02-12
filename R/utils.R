@@ -29,6 +29,24 @@ c_list = function(x, name=TRUE, ...) {
   as.list2(x, name, ...)
 }
 
+#' split vector by equal size
+#'
+#' Split vector x into chunks of equal size n
+#'
+#' @param x a vector.
+#' @param n a numeric, size of n.
+#'
+#' @examples
+#' x = 1:9
+#'
+#' split2(x, 3)
+#' split2(x, 6)
+#'
+#' @export
+split2 = function(x, n) {
+  split(x, ceiling(seq_along(x)/n))
+}
+
 #' merge data.frames list
 #'
 #' Merge a list of data.frames by common columns or row names.
@@ -103,3 +121,20 @@ cols_const = function(dt) UseMethod('cols_const')
 cols_const.data.frame = function(dt) {
   names(which(setDT(dt)[,sapply(.SD, function(x) length(unique(x))==1)]))
 }
+
+sql_check = function(sql, keywords = c('delete', 'drop')) {
+  ki = sapply(keywords, function(x) grepl(tolower(x), tolower(sql)))
+  kwd = keywords[ki]
+
+  if (length(kwd) > 0) {
+    tbl = readline(sprintf("The SQL contains %s, Please type in the table name:", paste0(kwd, collapse = '|')))
+    if (!grepl(tolower(tbl), tolower(sql))) {stop("Please double check the table name.")}
+  }
+
+  return(invisible())
+}
+
+func_try = function(func) {
+  try(eval(parse(text=func)), silent = TRUE)
+}
+

@@ -301,20 +301,7 @@ date_num = function(x, unit="s", origin = "1970-01-01", scientific = FALSE) {
 }
 
 
-dat_filter = function(dat, date_range, timestamp, timesubmit) {
-  if (!is.null(date_range) && !is.na(date_range)) {
-    timestamp_col = timesubmit_col = NULL
+to_decade = function(date) as.integer(paste0(substr(as.Date(date),1,3), '0'))
 
-    timecols = c(timestamp, timesubmit)
-    dat = copy(dat)[, (c('timestamp_col', 'timesubmit_col')) := lapply(.SD, as_date), .SDcols = timecols]
-
-    dat = dat[
-      timestamp_col >= date_from(date_range, timesubmit_col) &
-        timestamp_col < timesubmit_col
-    ][, (c('timestamp_col', 'timesubmit_col')) := NULL]
-
-  }
-
-  return(dat)
-}
+to_yearmonth = function(date) as.integer(gsub("-", "", substr(as.Date(date),1,7)))
 
